@@ -7,6 +7,7 @@ public class runGame {
 		while(!isFinish()) {
 			
 		}
+		print
 	}
 
 }
