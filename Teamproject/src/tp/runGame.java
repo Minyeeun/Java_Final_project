@@ -3,11 +3,17 @@ package tp;
 public class runGame {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		while(!isFinish()) {
-			
+		Game game = new Game();
+		
+		game.currentTime();
+		
+		while(!game.isFinish()) {
+			do {
+				game.temperature();
+				game.dayAndNight();
+			} while(game.work());
 		}
-		print
+		game.printRate();
 	}
 
 }
