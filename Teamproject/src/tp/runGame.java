@@ -7,7 +7,7 @@ public class runGame {
 		
 		//처음 게임시작하고 한번은 바로 설정됨
 		game.currentTime();
-		game.temperature();
+		game.temperature(); 
 		
 		while(!game.isFinish()) {
 			//어떤 동작이 있을때만 다음으로 넘어감
