@@ -7,7 +7,8 @@ public class PlantObject {
 		return hp;
 	}
 	
-	public void setHP(int x) {	//work 검사 후 +- 10씩
+	public void setHP(int hp) {	//work 검사 후 +- 10씩
 		this.hp = hp;
 	}
+	
 }
