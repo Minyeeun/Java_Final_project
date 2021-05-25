@@ -1,4 +1,4 @@
-package team_project;
+package tp;
 
 import java.awt.*;
 import java.awt.event.*;
