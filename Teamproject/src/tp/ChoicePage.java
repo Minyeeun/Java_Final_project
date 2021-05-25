@@ -1,14 +1,19 @@
 package tp;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class ChoicePage extends JFrame{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class ChoicePage extends JFrame implements MouseListener{
 	
-	/* ì‹ë¬¼ì¢… ì„ íƒ í˜ì´ì§€ */
+	/* ½Ä¹°Á¾ ¼±ÅÃ ÆäÀÌÁö */
 	
-	/* ê°€ë³¸ ì„¸íŒ… */
+	/* °¡º» ¼¼ÆÃ */
 	JFrame fm; 
 	JLabel label;
 	JPanel ChoicePn;
@@ -17,14 +22,14 @@ public class ChoicePage extends JFrame{
 	ChoicePage(){
 		
 		fm = new JFrame("Plant Game");
-		ChoicePn = new JPanel(); // íŒ¨ë„
+		ChoicePn = new JPanel(); // ÆĞ³Î
 		label = new JLabel("Choose your plant!");
 		appletree = new JButton("appletree");
 		option2 = new JButton("option2");  
 		option3 = new JButton("option3");  
 		option4 = new JButton("option4"); 
 		
-		// ë²„íŠ¼ ì‚¬ì´ì¦ˆ ì¡°ì •   
+		// ¹öÆ° »çÀÌÁî Á¶Á¤   
 		appletree.setPreferredSize(new Dimension(80, 80));  
 		option2.setPreferredSize(new Dimension(80, 80)); 
 		option3.setPreferredSize(new Dimension(80, 80));
@@ -37,16 +42,53 @@ public class ChoicePage extends JFrame{
 		
 		fm.getContentPane().add(ChoicePn);
 		
-		fm.setResizable(false); // ì‚¬ì´ì¦ˆ ì¡°ì • ë¶ˆê°€ëŠ¥  
-		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // ì°½ ë„ë©´ í”„ë¡œê·¸ë¨ ì¢…ë£Œí•˜ë„ë¡  
-		fm.setSize(400, 150); // ì‚¬ì´ì¦ˆ ì„¤ì •  
-		fm.setLocationRelativeTo(null); // ì°½ ê°€ìš´ë¡œ  
-		fm.setVisible(true); // ì°½ ë³´ì´ë„ë¡ 
+		fm.setResizable(false); // »çÀÌÁî Á¶Á¤ ºÒ°¡´É  
+		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // Ã¢ ²ô¸é ÇÁ·Î±×·¥ Á¾·áÇÏµµ·Ï  
+		fm.setSize(400, 150); // »çÀÌÁî ¼³Á¤  
+		fm.setLocationRelativeTo(null); // Ã¢ °¡¿î·Î  
+		fm.setVisible(true); // Ã¢ º¸ÀÌµµ·Ï 
+		
+		
+		appletree.addMouseListener((MouseListener) appletree);
+		
+		
+		
+
+	
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	class ButtonClickListener implements ActionListener {
-		/* ì‹ë¬¼ ì„ íƒ ë²„íŠ¼ ì´ë²¤íŠ¸  */
-	}
+	/* class ButtonClickListener implements ActionListener {
+		½Ä¹° ¼±ÅÃ ¹öÆ° ÀÌº¥Æ® 
+	} */
 	
 }

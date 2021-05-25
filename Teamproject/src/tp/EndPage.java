@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class EndPage extends JFrame{
+public class EndPage extends JFrame implements MouseListener{
 	
-	/* ê²Œì„ ì¢…ë£Œ í˜ì´ì§€ */
+	/* °ÔÀÓ Á¾·á ÆäÀÌÁö */
 	
-	/* ê°€ë³¸ ì„¸íŒ… */
+	/* °¡º» ¼¼ÆÃ */
 	JFrame fm;
 	JPanel EndPn;
 	JTextArea score, hp, day;
@@ -16,7 +16,7 @@ public class EndPage extends JFrame{
 	EndPage(){
 		
 		fm = new JFrame("Plant Game");
-		EndPn = new JPanel(new GridLayout(3,2)); // íŒ¨ë„
+		EndPn = new JPanel(new GridLayout(3,2)); // ÆĞ³Î
 		score = new JTextArea();
 		hp = new JTextArea();
 		day = new JTextArea();
@@ -28,16 +28,46 @@ public class EndPage extends JFrame{
 		
 		fm.getContentPane().add(EndPn, BorderLayout.CENTER);	
 		
-		fm.setResizable(false); // ì‚¬ì´ì¦ˆ ì¡°ì • ë¶ˆê°€ëŠ¥  
-		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // ì°½ ë„ë©´ í”„ë¡œê·¸ë¨ ì¢…ë£Œí•˜ë„ë¡  
-		fm.setSize(400, 200); // ì‚¬ì´ì¦ˆ ì„¤ì •  
-		fm.setLocationRelativeTo(null); // ì°½ ê°€ìš´ë¡œ  
-		fm.setVisible(true); // ì°½ ë³´ì´ë„ë¡ 
+		fm.setResizable(false); // »çÀÌÁî Á¶Á¤ ºÒ°¡´É  
+		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // Ã¢ ²ô¸é ÇÁ·Î±×·¥ Á¾·áÇÏµµ·Ï  
+		fm.setSize(400, 200); // »çÀÌÁî ¼³Á¤  
+		fm.setLocationRelativeTo(null); // Ã¢ °¡¿î·Î  
+		fm.setVisible(true); // Ã¢ º¸ÀÌµµ·Ï 
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	class ButtonClickListener implements ActionListener {
-		/* ì‹ë¬¼ ì„ íƒ ë²„íŠ¼ ì´ë²¤íŠ¸  */
-	}
-	
+	/* class ButtonClickListener implements ActionListener {
+	½Ä¹° ¼±ÅÃ ¹öÆ° ÀÌº¥Æ® 
+} */
+
 }

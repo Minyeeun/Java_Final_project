@@ -46,7 +46,8 @@ public class Game {
 
 			@Override
 			public void run() {
-				if (work() == true && dayCount <= 10) { ///사용자가 클릭을 하지 않으면 날짜가 안바뀌는 경우
+				if (//work() == true && 
+						dayCount <= 10) { ///사용자가 클릭을 하지 않으면 날짜가 안바뀌는 경우
 					// changeColor(); //밤낮바뀔 때 배경색도 바꿔줌
 					dayCount++;
 				} else if (dayCount > 10) { // 2번 바뀔때마다 하루가 카운트 됨(10번 바뀌면 5일 지난 것으로)
@@ -58,14 +59,15 @@ public class Game {
 		timer.schedule(task, 60000, 2000); // 1분간격
 	}
 
-	public boolean work() {	//행동 취헸는지 검사(마우스이벤트 유무로)
+	/*
+	public boolean work() {	//행동 취하는지 검사(마우스이벤트 유무로)
 		if() {	//마우스 클릭이 있으면 행동 취한 것
 			return true;
 		} else {	//마우스클릭 없으면 행동 안 취한 것
 			return false;
 		}
 	}
-	
+	*/
 	public void hp() {
 		if (tmp < 7) {
 			// 빛 쬐여주는 이벤트 잘 클릭했으면

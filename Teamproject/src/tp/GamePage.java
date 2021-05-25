@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GamePage extends JFrame{
+public class GamePage extends JFrame implements MouseListener{
 	
-	/* ê²Œì„ í˜ì´ì§€ */
+	/* °ÔÀÓ ÆäÀÌÁö */
 	
-	/* ê°€ë³¸ ì„¸íŒ… */
+	/* °¡º» ¼¼ÆÃ */
 	JFrame fm;
 	JPanel infoPn, imagePn, playPn, entire; 
 	JTextArea plantInfo, envirInfo; 
@@ -17,18 +17,18 @@ public class GamePage extends JFrame{
 	GamePage(){
 		
 		fm = new JFrame("Plant Game");
-		infoPn = new JPanel(new GridLayout(1,2)); // ì •ë³´ ë³´ì—¬ì£¼ëŠ”  
-		imagePn = new JPanel(); // ì‹ë¬¼ ê·¸ë¦¼ ë³´ì—¬ì£¼ëŠ”  
-		playPn = new JPanel(); // í´ë¦­ ë²„íŠ¼ ì´ìš©í•´ ê²Œì„í•˜ëŠ”  
-		entire = new JPanel(); // panel ë¬¶ê¸°  
-		plantInfo = new JTextArea(); // ì‹ë¬¼ ì •ë³´  
-		envirInfo = new JTextArea(); // í™˜ê²½ ì •ë³´ 
-		light = new JButton("light"); // ë¹› ë²„íŠ¼
-		wind = new JButton("wind"); // ì„ í’ê¸° ë²„íŠ¼   
-		water = new JButton("water"); // ë¬¼ ë²„íŠ¼   
+		infoPn = new JPanel(new GridLayout(1,2)); // Á¤º¸ º¸¿©ÁÖ´Â  
+		imagePn = new JPanel(); // ½Ä¹° ±×¸² º¸¿©ÁÖ´Â  
+		playPn = new JPanel(); // Å¬¸¯ ¹öÆ° ÀÌ¿ëÇØ °ÔÀÓÇÏ´Â  
+		entire = new JPanel(); // panel ¹­±â  
+		plantInfo = new JTextArea(); // ½Ä¹° Á¤º¸  
+		envirInfo = new JTextArea(); // È¯°æ Á¤º¸ 
+		light = new JButton("light"); // ºû ¹öÆ°
+		wind = new JButton("wind"); // ¼±Ç³±â ¹öÆ°   
+		water = new JButton("water"); // ¹° ¹öÆ°   
 		
 		infoPn.setLayout(new BoxLayout(infoPn, BoxLayout.X_AXIS));
-		infoPn.setPreferredSize(new Dimension(500, 200)); // í¬í‚¤ ì¡°ì ˆ  
+		infoPn.setPreferredSize(new Dimension(500, 200)); // Å©Å° Á¶Àı  
 		infoPn.add(plantInfo);
 		infoPn.add(envirInfo);
 		
@@ -48,17 +48,47 @@ public class GamePage extends JFrame{
 		
 		fm.getContentPane().add(entire, BorderLayout.CENTER);
 		
-		fm.setResizable(false); // ì‚¬ì´ì¦ˆ ì¡°ì • ë¶ˆê°€ëŠ¥  
-		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // ì°½ ë„ë©´ í”„ë¡œê·¸ë¨ ì¢…ë£Œí•˜ë„ë¡  
-		fm.setSize(500, 800); // ì‚¬ì´ì¦ˆ ì„¤ì •  
-		fm.setLocationRelativeTo(null); // ì°½ ê°€ìš´ë¡œ  
-		fm.setVisible(true); // ì°½ ë³´ì´ë„ë¡ 
+		fm.setResizable(false); // »çÀÌÁî Á¶Á¤ ºÒ°¡´É  
+		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // Ã¢ ²ô¸é ÇÁ·Î±×·¥ Á¾·áÇÏµµ·Ï  
+		fm.setSize(500, 800); // »çÀÌÁî ¼³Á¤  
+		fm.setLocationRelativeTo(null); // Ã¢ °¡¿î·Î  
+		fm.setVisible(true); // Ã¢ º¸ÀÌµµ·Ï 
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	class ButtonClickListener implements ActionListener {
-		/* ë¹› ì„ í’ê¸° ë¬¼ ë²„íŠ¼ ì„ íƒì‹œ hp ë³€ê²½   */
-		
-	}
+	/* class ButtonClickListener implements ActionListener {
+	½Ä¹° ¼±ÅÃ ¹öÆ° ÀÌº¥Æ® 
+} */
+
 	
 }

@@ -11,7 +11,8 @@ public class runGame {
 		
 		while(!game.isFinish()) {
 			//어떤 동작이 있을때만 다음으로 넘어감
-			if(game.work()) {
+			if(true//game.work()
+					) {
 				game.dayAndNight();
 				game.temperature();
 				game.hp();

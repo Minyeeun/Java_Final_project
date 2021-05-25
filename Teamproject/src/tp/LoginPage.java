@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class LoginPage extends JFrame{
+public class LoginPage extends JFrame implements MouseListener{
 	
-	/*ë‹‰ë„¤ì„ ì„¤ì • í˜ì´ì§€ */
+	/*´Ğ³×ÀÓ ¼³Á¤ ÆäÀÌÁö */
 	
-	/* ê°€ë³¸ ì„¸íŒ… */
+	/* °¡º» ¼¼ÆÃ */
 	JFrame fm;
 	JPanel loginPn; 
 	JTextField Ntext;
@@ -17,30 +17,53 @@ public class LoginPage extends JFrame{
 	LoginPage(){
 		
 		fm = new JFrame("Plant Game");
-		loginPn = new JPanel();// íŒ¨ë„
-		Ntext = new JTextField(); // ì‚¬ìš©ìê°€ ë‹‰ë„¤ì„ ì…ë ¥í•˜ëŠ” ê³µê°„  
-		loginBtn = new JButton("Click"); // ë¡œê·¸ì¸ ë²„íŠ¼  
+		loginPn = new JPanel();// ÆĞ³Î
+		Ntext = new JTextField(); // »ç¿ëÀÚ°¡ ´Ğ³×ÀÓ ÀÔ·ÂÇÏ´Â °ø°£  
+		loginBtn = new JButton("Click"); // ·Î±×ÀÎ ¹öÆ°  
 		
-		loginBtn.setPreferredSize(new Dimension(50, 50)); // ë²„íŠ¼ ì‚¬ì´ì¦ˆ ì¡°ì •  
-		Ntext.setPreferredSize(new Dimension(180, 50)); // ì…ë ¥ì°½ ì‚¬ì´ì¦ˆ ì¡°ì •  
+		loginBtn.setPreferredSize(new Dimension(50, 50)); // ¹öÆ° »çÀÌÁî Á¶Á¤  
+		Ntext.setPreferredSize(new Dimension(180, 50)); // ÀÔ·ÂÃ¢ »çÀÌÁî Á¶Á¤  
 		loginPn.add(new JLabel("Nickname"));		
 		loginPn.add(Ntext);
 		loginPn.add(loginBtn);
 		
 		fm.getContentPane().add(loginPn, BorderLayout.CENTER);	
 		
-		fm.setResizable(false); // ì‚¬ì´ì¦ˆ ì¡°ì • ë¶ˆê°€ëŠ¥  
-		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // ì°½ ë„ë©´ í”„ë¡œê·¸ë¨ ì¢…ë£Œí•˜ë„ë¡  
-		fm.setSize(400, 150); // ì‚¬ì´ì¦ˆ ì„¤ì •  
-		fm.setLocationRelativeTo(null); // ì°½ ê°€ìš´ë¡œ  
-		fm.setVisible(true); // ì°½ ë³´ì´ë„ë¡ 
+		fm.setResizable(false); // »çÀÌÁî Á¶Á¤ ºÒ°¡´É  
+		fm.setDefaultCloseOperation(EXIT_ON_CLOSE); // Ã¢ ²ô¸é ÇÁ·Î±×·¥ Á¾·áÇÏµµ·Ï  
+		fm.setSize(400, 150); // »çÀÌÁî ¼³Á¤  
+		fm.setLocationRelativeTo(null); // Ã¢ °¡¿î·Î  
+		fm.setVisible(true); // Ã¢ º¸ÀÌµµ·Ï 
 		
 	}
 	
-	class ButtonClickListener implements ActionListener {
-		/*ë‹‰ë„¤ì„ ì…ë ¥*/
-		/* 1. Ntextì— ì…ë ¥ëœ string ë°›
-		 * 2. loginBtn ëˆŒë €ì„ë•Œ ì´ë²¤íŠ¸ ë°œìƒ ì²˜ë¦¬í•˜ê¸° */
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
