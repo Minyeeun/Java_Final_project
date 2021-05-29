@@ -22,7 +22,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 	
 	private CropPanel cp[];							//밭 버튼을 클릭할 때 심을 농작물들을 표시하는 CropPanel 클래스 배열
 	private Thread th1;								//cp의 스레드
-	
+	private int fail_num =0;
 	private ImageIcon ic[] = new ImageIcon[20];	//밭의 이미지를 저장하는 Icon 배열(비어있는 밭, 농작물 심은 이미지, 수확대기 이미지, 상한 농작물 이미지)
 	
 	//FarmPanel class의 생성자
@@ -87,6 +87,16 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 		return "사과 : " + cropResult[0] + "개,  고구마: " + cropResult[1] + "개,  토마토: " + cropResult[2] + "개";
 	}
 	
+	public int return_result() {
+		return cropResult[0]*3 +cropResult[1]*2+cropResult[2];
+	}
+	
+	public boolean finish() {
+		if(fail_num >=5) {
+			return true;
+		}
+		return false;
+	}
 	//액션리스너 구현부분
 	public void actionPerformed(ActionEvent e){
 		for(int i=0;i<btnz.length;i++){
@@ -121,6 +131,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 					JOptionPane.showMessageDialog(btnz[i], String.format("%s을/를 갈아 엎었습니다.", e.getActionCommand()));
 					cp[i] = new CropPanel();			//해당 밭의 cp 인스턴스 재생성(초기화)
 					remainTime[i].setText("비어있음");		//remainTime 라벨을 비어있음으로 set
+					fail_num++;
 					break;
 				}
 				//해당 버튼이 비어있는 밭일 때, 밭 이름과 작물을 심어주세요라는 메시지 출력
