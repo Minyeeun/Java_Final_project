@@ -43,7 +43,22 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 		ic[4] = new ImageIcon("apple_4.png");	
 		ic[5] = new ImageIcon("apple_5.png");	
 		ic[6] = new ImageIcon("apple_6.png");		//사과밖에 안했지만 감자나 토마토 추가
-		ic[7] = new ImageIcon("fail.png");			//상한 농작물
+		
+		ic[7] = new ImageIcon("sweetpotato_1.png");	
+		ic[8] = new ImageIcon("sweetpotato_2.png");	
+		ic[9] = new ImageIcon("sweetpotato_3.png");	
+		ic[10] = new ImageIcon("sweetpotato_4.png");	
+		ic[11] = new ImageIcon("sweetpotato_5.png");	
+		ic[12] = new ImageIcon("sweetpotato_6.png");	
+		
+		ic[13] = new ImageIcon("tomato_1.png");	
+		ic[14] = new ImageIcon("tomato_2.png");	
+		ic[15] = new ImageIcon("tomato_3.png");	
+		ic[16] = new ImageIcon("tomato_4.png");	
+		ic[17] = new ImageIcon("tomato_5.png");	
+		ic[18] = new ImageIcon("tomato_6.png");	
+		
+		ic[19] = new ImageIcon("fail.png");			//상한 농작물
 		
 		for(int i=0;i<btnz.length;i++)
 		{
@@ -69,7 +84,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 	//수확한 농작물의 각 갯수를 get하는 메소드
 	public String getCropResult()
 	{
-		return "사과 : " + cropResult[0] + "개,  감자: " + cropResult[1] + "개,  토마토: " + cropResult[2] + "개";
+		return "사과 : " + cropResult[0] + "개,  고구마: " + cropResult[1] + "개,  토마토: " + cropResult[2] + "개";
 	}
 	
 	//액션리스너 구현부분
@@ -79,28 +94,28 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 			if(e.getSource() == btnz[i])
 			{
 				//해당버튼이 농작물을 이미 키우는 중일 때
-				if((btnz[i].getIcon() == ic[1]) || (btnz[i].getIcon() == ic[2]) || (btnz[i].getIcon() == ic[3])||(btnz[i].getIcon() == ic[4])||(btnz[i].getIcon() == ic[5]) )
+				if(!((btnz[i].getIcon() == ic[0]) || (btnz[i].getIcon() == ic[19]) || (btnz[i].getIcon() == ic[6])||(btnz[i].getIcon() == ic[12])||(btnz[i].getIcon() == ic[18])) )
 				{
 					//생산중이라는 메시지를 출력(이미 키우는 농작물에 중복으로 농작물을 심는 것을 방지)
 					JOptionPane.showMessageDialog(btnz[i], String.format("%s은/는 농작물 생산중입니다.", e.getActionCommand()));
 					break;
 				}
 				
-			
+			for(int j = 6;j<=18;j+=6) {
 					//해당버튼이 수확대기 상태일 때
-					if(btnz[i].getIcon() == ic[6])
+					if((btnz[i].getIcon() == ic[6] )||(btnz[i].getIcon() == ic[12] )||(btnz[i].getIcon() == ic[18] ))
 					{
 						//농작물을 수확한다는 메시지 출력
 						JOptionPane.showMessageDialog(btnz[i], String.format("%s의 %s을 수확합니다.", e.getActionCommand(), cp[i].getCropName()));
 						cp[i] = new CropPanel();			//해당 밭의 cp 인스턴스 재생성(초기화)
-						cropResult[0]++;				    //수확한 농작물의 갯수 증가 사과밖에 없어서 0
+						cropResult[j/6-1]++;				    //수확한 농작물의 갯수 증가 사과밖에 없어서 0
 						result.setText(getCropResult());	//result 라벨을 새로 set(변경된 값 반영)
 						remainTime[i].setText("비어있음");		//remainTime 라벨을 비어있음으로 set
 						return;								
 					}
-				
+			}
 				//해당 버튼의 농작물이 상한 상태일 때
-				if(btnz[i].getIcon() == ic[7])
+				if(btnz[i].getIcon() == ic[19])
 				{
 					//밭을 갈아 엎는다는 메시지 출력
 					JOptionPane.showMessageDialog(btnz[i], String.format("%s을/를 갈아 엎었습니다.", e.getActionCommand()));
@@ -185,47 +200,121 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 					else if(cp[i].getTimer().getTime() <= 0)
 					{
 						//버튼 이미지를 상한 농작물 이미지로
-						btnz[i].setIcon(ic[7]);
+						btnz[i].setIcon(ic[19]);
 						//remainTime 라벨에 작물 상함으로 set
 						remainTime[i].setText("작물 상함.");
 					}
 				}
 				
-				
+				//밭 i의 심은 농작물이 브로콜리인 경우
 				else if(cp[i].getCrop(1) == true)
 				{
-					if(cp[i].getTimer().getTime() > 10)
+					//cp i의 timer값이 10초이상인 경우(10~20)
+					if(cp[i].getTimer().getTime() > 30)
 					{
-						btnz[i].setIcon(ic[3]);
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[7]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					else if(cp[i].getTimer().getTime() > 25)
+					{
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[8]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					else if(cp[i].getTimer().getTime() > 20)
+					{
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[9]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					else if(cp[i].getTimer().getTime() > 15)
+					{
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[10]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					
+					else if((10 < cp[i].getTimer().getTime()) && (cp[i].getTimer().getTime() <= 15))
+					{
+						//버튼 이미지를 수확대기 이미지로
+						btnz[i].setIcon(ic[11]);
+						//상할 때까지 남은 시간 표시
 						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
 					}
 					else if((0 < cp[i].getTimer().getTime()) && (cp[i].getTimer().getTime() <= 10))
 					{
-						btnz[i].setIcon(ic[4]);
+						//버튼 이미지를 수확대기 이미지로
+						btnz[i].setIcon(ic[12]);
+						//상할 때까지 남은 시간 표시
 						remainTime[i].setText("상할 때까지 남은시간 : "+ cp[i].getTimer().getTime());
 					}
+					//cp i의 timer값이 0이하인 경우
 					else if(cp[i].getTimer().getTime() <= 0)
 					{
-						btnz[i].setIcon(ic[7]);
+						//버튼 이미지를 상한 농작물 이미지로
+						btnz[i].setIcon(ic[19]);
+						//remainTime 라벨에 작물 상함으로 set
 						remainTime[i].setText("작물 상함.");
 					}
 				}
-				
+				//밭 i의 심은 농작물이 배추인 경우
 				else if(cp[i].getCrop(2) == true)
 				{
-					if(cp[i].getTimer().getTime() > 10)
+					//cp i의 timer값이 10초이상인 경우(10~20)
+					if(cp[i].getTimer().getTime() > 30)
 					{
-						btnz[i].setIcon(ic[5]);
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[13]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					else if(cp[i].getTimer().getTime() > 25)
+					{
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[14]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					else if(cp[i].getTimer().getTime() > 20)
+					{
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[15]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					else if(cp[i].getTimer().getTime() > 15)
+					{
+						//버튼 이미지를 생산중인 이미지로
+						btnz[i].setIcon(ic[16]);
+						//수확까지 남은 시간 표시
+						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
+					}
+					
+					else if((10 < cp[i].getTimer().getTime()) && (cp[i].getTimer().getTime() <= 15))
+					{
+						//버튼 이미지를 수확대기 이미지로
+						btnz[i].setIcon(ic[17]);
+						//상할 때까지 남은 시간 표시
 						remainTime[i].setText("수확까지 남은시간 : "+ (cp[i].getTimer().getTime()-10));
 					}
 					else if((0 < cp[i].getTimer().getTime()) && (cp[i].getTimer().getTime() <= 10))
 					{
-						btnz[i].setIcon(ic[6]);
+						//버튼 이미지를 수확대기 이미지로
+						btnz[i].setIcon(ic[18]);
+						//상할 때까지 남은 시간 표시
 						remainTime[i].setText("상할 때까지 남은시간 : "+ cp[i].getTimer().getTime());
 					}
+					//cp i의 timer값이 0이하인 경우
 					else if(cp[i].getTimer().getTime() <= 0)
 					{
-						btnz[i].setIcon(ic[7]);
+						//버튼 이미지를 상한 농작물 이미지로
+						btnz[i].setIcon(ic[19]);
+						//remainTime 라벨에 작물 상함으로 set
 						remainTime[i].setText("작물 상함.");
 					}
 				}
