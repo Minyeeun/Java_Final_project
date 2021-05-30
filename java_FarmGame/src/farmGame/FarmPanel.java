@@ -301,7 +301,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 			
 			if(finish() == true){
 				return_result(); // 현재까지 점수 소켓에 전송
-				stop == true;
+				stop = true;
 			}
 			
 		}
