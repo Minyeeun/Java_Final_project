@@ -5,101 +5,101 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-/*½ÉÀ» ³óÀÛ¹°À» È­¸é¿¡ Ç¥½ÃÇÏ°í FarmPanel°ú ¿¬µ¿ÇÏ´Â Å¬·¡½º CropPanel
- * JFrame Å¬·¡½º »ó¼Ó, ActionListener, Runnable ÀÎÅÍÆäÀÌ½º ±¸Çö
+/*ì‹¬ì„ ë†ì‘ë¬¼ì„ í™”ë©´ì— í‘œì‹œí•˜ê³  FarmPanelê³¼ ì—°ë™í•˜ëŠ” í´ë˜ìŠ¤ CropPanel
+ * JFrame í´ë˜ìŠ¤ ìƒì†, ActionListener, Runnable ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„
  */
 public class CropPanel extends JFrame implements ActionListener, Runnable {
-	private JButton btnz[];					//½ÉÀ» ³óÀÛ¹° ¹öÆ° ¹è¿­
-	private boolean crop[];					//¾î¶² ³óÀÛ¹°À» Å¬¸¯Çß´ÂÁö ¿©ºÎ¸¦ true, false·Î ÀúÀåÇÏ´Â ¹è¿­
+	private JButton btnz[];					//ì‹¬ì„ ë†ì‘ë¬¼ ë²„íŠ¼ ë°°ì—´
+	private boolean crop[];					//ì–´ë–¤ ë†ì‘ë¬¼ì„ í´ë¦­í–ˆëŠ”ì§€ ì—¬ë¶€ë¥¼ true, falseë¡œ ì €ì¥í•˜ëŠ” ë°°ì—´
 
-	private Timer timer;					//³óÀÛ¹° ÀÎ½ºÅÏ½ºÀÇ ½Ã°£À» Àç´Â Timer ÀÎ½ºÅÏ½º
-	private Thread th2;						//timerÀÇ ¾²·¹µå
+	private Timer timer;					//ë†ì‘ë¬¼ ì¸ìŠ¤í„´ìŠ¤ì˜ ì‹œê°„ì„ ì¬ëŠ” Timer ì¸ìŠ¤í„´ìŠ¤
+	private Thread th2;						//timerì˜ ì“°ë ˆë“œ
 	
-	private String cropName;				//³óÀÛ¹°ÀÇ ÀÌ¸§À» ÀúÀåÇÏ´Â º¯¼ö
+	private String cropName;				//ë†ì‘ë¬¼ì˜ ì´ë¦„ì„ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
 	
 	public boolean flag = false;
 	
-	//CropPanel ClassÀÇ »ı¼ºÀÚ
+	//CropPanel Classì˜ ìƒì„±ì
 	public CropPanel(){
-		btnz = new JButton[3];						//³óÀÛ¹° ¹öÆ° ¹è¿­ ÀÎ½ºÅÏ½º »ı¼º(3Á¾·ù)
-		crop = new boolean[3];						//³óÀÛ¹° Å¬¸¯¿©ºÎ¸¦ ÀúÀåÇÏ´Â ¹è¿­ »ı¼º
+		btnz = new JButton[3];						//ë†ì‘ë¬¼ ë²„íŠ¼ ë°°ì—´ ì¸ìŠ¤í„´ìŠ¤ ìƒì„±(3ì¢…ë¥˜)
+		crop = new boolean[3];						//ë†ì‘ë¬¼ í´ë¦­ì—¬ë¶€ë¥¼ ì €ì¥í•˜ëŠ” ë°°ì—´ ìƒì„±
 		
-		timer = new Timer();						//TimerÀÎ½ºÅÏ½º »ı¼º
+		timer = new Timer();						//Timerì¸ìŠ¤í„´ìŠ¤ ìƒì„±
 		
-		setLayout(new GridLayout(3, 1));			//3x1 Grid LayoutÀ¸·Î set
+		setLayout(new GridLayout(3, 1));			//3x1 Grid Layoutìœ¼ë¡œ set
 		
-		//3Á¾·ùÀÇ ³óÀÛ¹° ÀÌ¹ÌÁö¸¦ Icon ÀÎ½ºÅÏ½º¸¦ »ı¼ºÇØ ÀúÀå
+		//3ì¢…ë¥˜ì˜ ë†ì‘ë¬¼ ì´ë¯¸ì§€ë¥¼ Icon ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•´ ì €ì¥
 		Icon ic1 = new ImageIcon("apple.png");
-		Icon ic2 = new ImageIcon("potato.png");
+		Icon ic2 = new ImageIcon("sweetpotato.png");
 		Icon ic3 = new ImageIcon("tomato.png");
 		
-		//°¢ ¹öÆ°¹è¿­ ¿ä¼Ò¿¡ ´ëÇØ ÀÌ¸§°ú ÀÌ¹ÌÁö¸¦ ºÙ¿© ¹öÆ° »ı¼º
-		btnz[0] = new JButton("»ç°ú",ic1);
-		btnz[1] = new JButton("°¨ÀÚ",ic2);
-		btnz[2] = new JButton("Åä¸¶Åä",ic3);
+		//ê° ë²„íŠ¼ë°°ì—´ ìš”ì†Œì— ëŒ€í•´ ì´ë¦„ê³¼ ì´ë¯¸ì§€ë¥¼ ë¶™ì—¬ ë²„íŠ¼ ìƒì„±
+		btnz[0] = new JButton("ì‚¬ê³¼",ic1);
+		btnz[1] = new JButton("ê³ êµ¬ë§ˆ",ic2);
+		btnz[2] = new JButton("í† ë§ˆí† ",ic3);
 		
 		
 		for(int i=0;i<btnz.length;i++)
 		{
-			add(btnz[i]);						//°¢ ¹öÆ°À» È­¸é¿¡ Ãß°¡
-			btnz[i].addActionListener(this);	//°¢ ¹öÆ°À» ¾×¼Ç¸®½º³Ê¿¡ Ãß°¡
+			add(btnz[i]);						//ê° ë²„íŠ¼ì„ í™”ë©´ì— ì¶”ê°€
+			btnz[i].addActionListener(this);	//ê° ë²„íŠ¼ì„ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆì— ì¶”ê°€
 		}
 	}
 	
-	//crop¹è¿­ÀÇ °ªÀ» setÇÏ´Â ¸Ş¼Òµå
+	//cropë°°ì—´ì˜ ê°’ì„ setí•˜ëŠ” ë©”ì†Œë“œ
 	public void setCrop(String cropName)
 	{
-		//cropName ÆÄ¶ó¹ÌÅÍ¸¦ ÅëÇØ ¾î´À index¸¦ true·ÎÇØ¾ßÇÒÁö ÆÇ´Ü
-		if(cropName.equals("»ç°ú"))
+		//cropName íŒŒë¼ë¯¸í„°ë¥¼ í†µí•´ ì–´ëŠ indexë¥¼ trueë¡œí•´ì•¼í• ì§€ íŒë‹¨
+		if(cropName.equals("ì‚¬ê³¼"))
 			crop[0] = true;
-		else if(cropName.equals("°¨ÀÚ"))
+		else if(cropName.equals("ê³ êµ¬ë§ˆ"))
 			crop[1] = true;
-		else if(cropName.equals("Åä¸¶Åä"))
+		else if(cropName.equals("í† ë§ˆí† "))
 			crop[2] = true;
 	}
 	
-	//crop¹è¿­ÀÇ °ªÀ» getÇÏ´Â ¸Ş¼Òµå
+	//cropë°°ì—´ì˜ ê°’ì„ getí•˜ëŠ” ë©”ì†Œë“œ
 	public boolean getCrop(int i)
 	{
-		return crop[i];	//i ÆÄ¶ó¹ÌÅÍ¸¦ index·Î ÇØ¼­ ÇØ´ç indexÀÇ cropÀ» ¸®ÅÏ
+		return crop[i];	//i íŒŒë¼ë¯¸í„°ë¥¼ indexë¡œ í•´ì„œ í•´ë‹¹ indexì˜ cropì„ ë¦¬í„´
 	}
 	
-	//³óÀÛ¹°ÀÇ ÀÌ¸§À» getÇÏ´Â ¸Ş¼Òµå
+	//ë†ì‘ë¬¼ì˜ ì´ë¦„ì„ getí•˜ëŠ” ë©”ì†Œë“œ
 	public String getCropName()
 	{
 		return cropName;
 	}
 	
-	//timerÀÎ½ºÅÏ½º¸¦ getÇÏ´Â ¸Ş¼Òµå
+	//timerì¸ìŠ¤í„´ìŠ¤ë¥¼ getí•˜ëŠ” ë©”ì†Œë“œ
 	public Timer getTimer()
 	{
 		return timer;
 	}
 	
-	//¾×¼Ç¸®½º³Ê ±¸ÇöºÎºĞ
+	//ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ êµ¬í˜„ë¶€ë¶„
 	public void actionPerformed(ActionEvent e){
 		for(int i=0;i<btnz.length;i++){
 			if(e.getSource() == btnz[i])
 			{
-				//¹öÆ°À» Å¬¸¯ÇßÀ» ¶§, ¾î¶² ³óÀÛ¹°À» ½É´ÂÁö ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÏ°í ÇØ´ç ÀÛ¹°ÀÇ ÀÌ¸§À» ÅëÇØ crop¹è¿­°ú cropNameÀ» set
-				JOptionPane.showMessageDialog(btnz[i], String.format("%s¸¦ ½É½À´Ï´Ù.", e.getActionCommand()));
+				//ë²„íŠ¼ì„ í´ë¦­í–ˆì„ ë•Œ, ì–´ë–¤ ë†ì‘ë¬¼ì„ ì‹¬ëŠ”ì§€ ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•˜ê³  í•´ë‹¹ ì‘ë¬¼ì˜ ì´ë¦„ì„ í†µí•´ cropë°°ì—´ê³¼ cropNameì„ set
+				JOptionPane.showMessageDialog(btnz[i], String.format("%së¥¼ ì‹¬ìŠµë‹ˆë‹¤.", e.getActionCommand()));
 				setCrop(btnz[i].getText());
 				cropName = btnz[i].getText();
 				
-				/*ÇØ´ç ¹öÆ°¿¡ ´ëÇÑ timer ½º·¹µå »ı¼º.
-				 *  CropPanel Å¬·¡½ºÀÇ ÀÎ½ºÅÏ½º´Â FarmPanel Å¬·¡½º¿¡¼­ »ı¼º.
-				 *  ÃÖÁ¾ÀûÀ¸·Î´Â FarmPanelÀÇ ½É¾îÁö´Â ÀÛ¹°¿¡ ´ëÇÑ timer ½º·¹µå
+				/*í•´ë‹¹ ë²„íŠ¼ì— ëŒ€í•œ timer ìŠ¤ë ˆë“œ ìƒì„±.
+				 *  CropPanel í´ë˜ìŠ¤ì˜ ì¸ìŠ¤í„´ìŠ¤ëŠ” FarmPanel í´ë˜ìŠ¤ì—ì„œ ìƒì„±.
+				 *  ìµœì¢…ì ìœ¼ë¡œëŠ” FarmPanelì˜ ì‹¬ì–´ì§€ëŠ” ì‘ë¬¼ì— ëŒ€í•œ timer ìŠ¤ë ˆë“œ
 				 */
 				th2 = new Thread(timer);
 				th2.start();
 				
-				this.setVisible(false);	//¾×¼ÇÀÌ ¿Ï·áµÇ¸é Ã¢À» ´İÀ½
+				this.setVisible(false);	//ì•¡ì…˜ì´ ì™„ë£Œë˜ë©´ ì°½ì„ ë‹«ìŒ
 				break;
 			}
 		}
 	}
 	
-	//½º·¹µå ½ÃÀÛ½Ã ½ÇÇàµÇ´Â ¸Ş¼Òµå
+	//ìŠ¤ë ˆë“œ ì‹œì‘ì‹œ ì‹¤í–‰ë˜ëŠ” ë©”ì†Œë“œ
 	public void run(){
 		this.setTitle("Crop Panel");
 		this.setVisible(true);
