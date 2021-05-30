@@ -22,7 +22,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 
 	private CropPanel cp[]; // 밭 버튼을 클릭할 때 심을 농작물들을 표시하는 CropPanel 클래스 배열
 	private Thread th1; // cp의 스레드
-	private int fail_num = 0;
+	private int fail_num = 0; // 게임 종료를 위한 변수  
 	private ImageIcon ic[] = new ImageIcon[20]; // 밭의 이미지를 저장하는 Icon 배열(비어있는 밭, 농작물 심은 이미지, 수확대기 이미지, 상한 농작물 이미지)
 
 	// FarmPanel class의 생성자
@@ -84,11 +84,14 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 	public String getCropResult() {
 		return "사과 : " + cropResult[0] + "개,  고구마: " + cropResult[1] + "개,  토마토: " + cropResult[2] + "개";
 	}
-
-	public int return_result() {
-		return cropResult[0] * 3 + cropResult[1] * 2 + cropResult[2];
+	
+	// 수확한 농작물로 점수를 할당하여 소켓에 전송하는 메소드
+	public void return_result() {
+		int score = cropResult[0] * 3 + cropResult[1] * 2 + cropResult[2]; // 총점수
+		SocketConnect.getInstance().SaveRank(score); // 소켓에 전송  
 	}
-
+	
+	// 게임 종료 
 	public boolean finish() {
 		if (fail_num >= 5) {
 			return true;
