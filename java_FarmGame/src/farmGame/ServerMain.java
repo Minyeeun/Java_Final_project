@@ -23,7 +23,7 @@ public class ServerMain {
 			while (true) {
 				
 				s = ss.accept(); // 클라이언트 소켓 생성 
-				ServerThread st = new ServerThread(s); // 클라이언트 소켓으로 쓰레기 실행 
+				ServerThread st = new ServerThread(s); // 클라이언트 소켓으로 쓰레드  실행 
 				st.start();
 				
 			}
@@ -38,6 +38,10 @@ public class ServerMain {
 	
 	public static void main(String[] args) {
 		ServerMain sm = new ServerMain();
+		
+		try {
+			sm.go();
+		} catch (IOException e) {e.printStackTrace();}
 		
 	}
 }
