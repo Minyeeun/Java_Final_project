@@ -23,6 +23,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 	private CropPanel cp[]; // 밭 버튼을 클릭할 때 심을 농작물들을 표시하는 CropPanel 클래스 배열
 	private Thread th1; // cp의 스레드
 	private int fail_num = 0; // 게임 종료를 위한 변수  
+	private boolean stop = false; // 쓰레드 종료를 위한 
 	private ImageIcon ic[] = new ImageIcon[20]; // 밭의 이미지를 저장하는 Icon 배열(비어있는 밭, 농작물 심은 이미지, 수확대기 이미지, 상한 농작물 이미지)
 
 	// FarmPanel class의 생성자
@@ -133,10 +134,6 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 					cp[i] = new CropPanel(); // 해당 밭의 cp 인스턴스 재생성(초기화)
 					remainTime[i].setText("비어있음"); // remainTime 라벨을 비어있음으로 set
 					fail_num++; // 실패한 경우 추가
-					if(finish() == true){
-						return_result(); // 현재까지 점수 소켓에 전송
-						///// 게임 종료 -> 점수판 
-					}
 					break;
 				}
 				// 해당 버튼이 비어있는 밭일 때, 밭 이름과 작물을 심어주세요라는 메시지 출력
@@ -157,7 +154,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// 스레드가 종료될 때까지 계속 반복
-		while (true) {
+		while (!stop) {
 			/*
 			 * 각 밭에 대한 농작물의 상태를 나타내기 위한 for문 모든 농작물을 처음 심고 10초 동안 생산 중 상태 이며 10초 후에는 수확 대기
 			 * 상태, 20초 후에는 작물이 상한다.
@@ -300,7 +297,13 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 				else
 					// 해당 버튼을 비어있는 이미지로
 					btnz[i].setIcon(ic[0]);
+			} 
+			
+			if(finish() == true){
+				return_result(); // 현재까지 점수 소켓에 전송
+				stop == true;
 			}
+			
 		}
 	}
 }
