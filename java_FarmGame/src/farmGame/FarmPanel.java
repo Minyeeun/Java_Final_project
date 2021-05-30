@@ -2,6 +2,7 @@ package farmGame;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -87,7 +88,7 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 	}
 	
 	// 수확한 농작물로 점수를 할당하여 소켓에 전송하는 메소드
-	public void return_result() {
+	public void return_result() throws IOException {
 		int score = cropResult[0] * 3 + cropResult[1] * 2 + cropResult[2]; // 총점수
 		SocketConnect.getInstance().SaveRank(score); // 소켓에 전송  
 	}
@@ -300,7 +301,12 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 			} 
 			
 			if(finish() == true){
-				return_result(); // 현재까지 점수 소켓에 전송
+				try {
+					return_result();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} // 현재까지 점수 소켓에 전송
 				stop = true;
 			}
 			
