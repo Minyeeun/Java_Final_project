@@ -132,7 +132,11 @@ public class FarmPanel extends JFrame implements ActionListener, Runnable {
 					JOptionPane.showMessageDialog(btnz[i], String.format("%s을/를 갈아 엎었습니다.", e.getActionCommand()));
 					cp[i] = new CropPanel(); // 해당 밭의 cp 인스턴스 재생성(초기화)
 					remainTime[i].setText("비어있음"); // remainTime 라벨을 비어있음으로 set
-					fail_num++;
+					fail_num++; // 실패한 경우 추가
+					if(finish() == true){
+						return_result(); // 현재까지 점수 소켓에 전송
+						///// 게임 종료 -> 점수판 
+					}
 					break;
 				}
 				// 해당 버튼이 비어있는 밭일 때, 밭 이름과 작물을 심어주세요라는 메시지 출력
